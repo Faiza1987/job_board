@@ -23,4 +23,8 @@ class JobsController < ApplicationController
       render :new # take whatever data the controller currently has and send only that data back to the browser; we want to hang on to the current job object
     end
   end
+
+  def edit
+    @job = Job.find(params[:id])
+  end
 end
