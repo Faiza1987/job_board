@@ -10,4 +10,6 @@ Rails.application.routes.draw do
 
   get '/jobs/:id/edit', to: 'jobs#edit', as: 'edit_job'
   patch 'jobs/:id', to: 'jobs#update'
+
+  delete  'jobs/:id', to: 'jobs#destroy', as: 'delete_job'
 end

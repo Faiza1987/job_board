@@ -4,7 +4,11 @@ class JobsController < ApplicationController
   end
 
   def show 
-    @job = Job.find(params[:id])
+    @job = Job.find_by(id: params[:id])
+
+    if @job.nil?
+      redirect_to jobs_path
+    end
   end
 
   def new 
@@ -25,11 +29,11 @@ class JobsController < ApplicationController
   end
 
   def edit
-    @job = Job.find(params[:id])
+    @job = Job.find_by(id: params[:id])
   end
 
   def update
-    @job = Job.find(params[:id])
+    @job = Job.find_by(id: params[:id])
     is_successful = @job.update(
       {
         title: params[:job][:title],
@@ -44,5 +48,25 @@ class JobsController < ApplicationController
       # if unsuccessful, stays on the edit form
       render :edit
     end
+  end
+
+  def destroy
+    # we only need instance variables when they are accessed in a view external from the controller.
+
+    # If we're not accessing variables inside of a view, they should not be instance variables
+
+    job = Job.find_by(id: params[:id])
+
+    if job.destroy 
+      redirect_to jobs_path
+    else 
+    end
+
+  end
+
+  private
+  
+  def job_params
+    return params.require(:job).permit(:title, :description, :company)
   end
 end
