@@ -5,4 +5,5 @@
   <strong><%= @job.title %></strong> at <strong><%= @job.company%></strong>
   <p><%= @job.description %></p>
   <%= link_to "Edit Job", edit_job_path(@job.id) %>
+  <%= link_to "Home", jobs_path %>
 </div>

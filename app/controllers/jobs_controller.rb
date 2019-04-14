@@ -27,4 +27,22 @@ class JobsController < ApplicationController
   def edit
     @job = Job.find(params[:id])
   end
+
+  def update
+    @job = Job.find(params[:id])
+    is_successful = @job.update(
+      {
+        title: params[:job][:title],
+        description: params[:job][:description],
+        company: params[:job][:company]
+      }
+    )
+
+    if is_successful
+      redirect_to job_path(@job.id) # OR params[:id]
+    else
+      # if unsuccessful, stays on the edit form
+      render :edit
+    end
+  end
 end
