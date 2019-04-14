@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get '/jobs', to: 'jobs#index', as: 'jobs'
 
   get '/jobs/new', to: 'jobs#new', as: 'new_job'
+  post '/jobs', to: 'jobs#create' # already has a nickname    
 
   get '/jobs/:id', to: 'jobs#show', as: 'job'
 

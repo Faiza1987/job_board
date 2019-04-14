@@ -8,5 +8,19 @@ class JobsController < ApplicationController
   end
 
   def new 
+    @job = Job.new
+  end
+
+  def create 
+    @job = Job.new(
+      title: params[:job][:title],
+      description: params[:job][:description],
+      company: params[:job][:company]
+    )
+    if @job.save
+      redirect_to jobs_path # goes all the way through the request cycle again
+    else
+      render :new # take whatever data the controller currently has and send only that data back to the browser; we want to hang on to the current job object
+    end
   end
 end
